@@ -140,7 +140,7 @@ final class VideoPlayer {
         
         
          DefaultExtractorsFactory defaultExtractorsFactory = new DefaultExtractorsFactory();
-         defaultExtractorsFactory.setTsExtractorFlags(DefaultTsPayloadReaderFactory.FLAG_ALLOW_NON_IDR_KEYFRAMES);
+         defaultExtractorsFactory.setTsExtractorFlags(1);
 
          return new ExtractorMediaSource.Factory(mediaDataSourceFactory).setExtractorsFactory(defaultExtractorsFactory).createMediaSource(uri);
       default:
