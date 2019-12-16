@@ -137,9 +137,12 @@ final class VideoPlayer {
       case C.TYPE_HLS:
         return new HlsMediaSource.Factory(mediaDataSourceFactory).createMediaSource(uri);
       case C.TYPE_OTHER:
-        return new ExtractorMediaSource.Factory(mediaDataSourceFactory)
-            .setExtractorsFactory(new DefaultExtractorsFactory())
-            .createMediaSource(uri);
+        
+        
+         DefaultExtractorsFactory defaultExtractorsFactory = new DefaultExtractorsFactory();
+         defaultExtractorsFactory.setTsExtractorFlags(DefaultTsPayloadReaderFactory.FLAG_ALLOW_NON_IDR_KEYFRAMES);
+
+         return new ExtractorMediaSource.Factory(mediaDataSourceFactory).setExtractorsFactory(defaultExtractorsFactory).createMediaSource(uri);
       default:
         {
           throw new IllegalStateException("Unsupported type: " + type);
